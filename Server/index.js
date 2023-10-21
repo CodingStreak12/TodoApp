@@ -2,6 +2,7 @@
 
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 
 // files imports
 import todoRoutes from "./routes/todoRoutes.js";
@@ -17,6 +18,7 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 
 //middlewares
+app.use(cors());
 app.use(express.json());
 app.use("/todo", todoRoutes);
 app.use(notFound);
