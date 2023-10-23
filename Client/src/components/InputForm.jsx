@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import axios from "axios";
 
-function InputForm() {
+function InputForm({ addTodo }) {
   const [todoInput, setTodoInput] = useState("");
   function handleInput(e) {
     setTodoInput(e.target.value);
@@ -15,6 +16,8 @@ function InputForm() {
       if (!data.success) {
         throw new Error("Cannot Post Your request");
       }
+
+      addTodo(data.data);
       setTodoInput("");
     } catch (err) {
       console.log(err);

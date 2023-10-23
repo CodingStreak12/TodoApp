@@ -1,20 +1,25 @@
+/* eslint-disable react/prop-types */
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import Todo from "./Todo";
 
-function Todos() {
-  const [allTodos, setAllTodos] = useState([]);
-
+function Todos({ allTodos, setAllTodos, deleteTodo, editTodo }) {
   useEffect(() => {
     async function getData() {
       const todos = await axios.get("http://localhost:4000/todo");
       setAllTodos(todos.data.data);
     }
     getData();
-  }, []);
+  }, [setAllTodos]);
   return (
     <div className="todos">
       {allTodos.map((todo) => (
-        <h1 key={todo.todo}>{todo.todo}</h1>
+        <Todo
+          todo={todo}
+          key={todo.todo}
+          deleteTodo={deleteTodo}
+          editTodo={editTodo}
+        />
       ))}
     </div>
   );
